@@ -5,13 +5,7 @@ public class BankAccount {
     String email;
     String phoneNumber;
 
-    public BankAccount(String accountNumber, double accountBalance, String customerName, String email, String phoneNumber) {
-        this.accountNumber = accountNumber;
-        this.accountBalance = accountBalance;
-        this.customerName = customerName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-    }
+
 
     public String getAccountNumber() {
         return accountNumber;
