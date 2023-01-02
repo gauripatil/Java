@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class ArrayListAllOperations {
@@ -32,6 +34,63 @@ public class ArrayListAllOperations {
 
         // get
         System.out.println("groceries[1] : " + groceries.get(1));
+
+        // contains
+        if(groceries.contains("mustard")) {
+            System.out.println("Groceries list contains mustard");
+        }
+
+        groceries.add("yogurt");
+
+        // indexOf
+        System.out.println("Yogurt first index : " + groceries.indexOf("yogurt"));
+
+        // lastIndexOf
+        System.out.println("Yogurt last index : " + groceries.lastIndexOf("yogurt"));
+
+        // remove - WAY 1 - by index
+        groceries.remove(4);
+        System.out.println("groceries remove : " + groceries);
+
+        // remove - WAY 2 - by name
+        groceries.remove("yogurt");
+        System.out.println("groceries remove : " + groceries);
+
+        // removeAll - remove all items from list which are passed as parameters
+        groceries.removeAll(List.of("apples", "eggs"));
+        System.out.println("groceries removeAll : " + groceries);
+
+        // retainAll - opposite of removeAll - removes all element except which are passed as parameter to retainAll
+        groceries.retainAll(List.of("apples", "milk", "mustard", "cheese"));
+        System.out.println("groceries retainAll : " + groceries);
+
+        // clear - delete all
+        groceries.clear();
+        System.out.println("groceries clear : " + groceries);
+
+        // isEmpty
+        System.out.println("isEmpty groceries : " + groceries.isEmpty());
+
+        // addAll & List.of
+        groceries.addAll(List.of("apples", "milk", "mustard", "cheese"));
+        System.out.println("groceries addAll(List.of) : " + groceries);
+
+        // addAll & Arrays.asList
+        groceries.addAll(Arrays.asList("eggs", "bread", "jam", "pickle"));
+        System.out.println("groceries addAll(Arrays.asList) : " + groceries);
+
+        // naturalOrder
+        groceries.sort(Comparator.naturalOrder());
+        System.out.println("groceries naturalOrder : " + groceries);
+
+        // reverseOrder
+        groceries.sort(Comparator.reverseOrder());
+        System.out.println("groceries reverseOrder : " + groceries);
+
+        //
+        var groceryArray  = groceries.toArray(new String[groceries.size()]);
+        System.out.println(Arrays.toString(groceryArray));
+
 
 
 
