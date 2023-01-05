@@ -27,11 +27,8 @@ public class ArrayListChallengeGroceryApp {
     public static void printActions() {
         String textblock = """
                     Available actions:
-                    
                     0 - to shutdown
-                    
                     1 - to add item(s) to list (comma delimited list)
-                    
                     2 - to remove any items (comma delimited list)
                     
                     Enter a number for which action you want to do:""";
@@ -43,23 +40,41 @@ public class ArrayListChallengeGroceryApp {
         System.out.print("Enter items to be added separated by comma: ");
         Scanner input = new Scanner(System.in);
         String[] item = input.nextLine().split(",");
-        groceryList.addAll(List.of(item));
+
+        // this code was not handling space properly
+        // groceryList.addAll(List.of(item));
+
+        // Code block to add trimmed data in the grocery list &
+        // to avoid duplicates in the list
+        for (String i: item
+             ) {
+            String trimmed = i.trim();
+            if(groceryList.indexOf(trimmed) < 0) {
+                groceryList.add(trimmed);
+            }
+        }
+
         printList(groceryList);
     }
 
     public static void removeItem(ArrayList<String> groceryList) {
-        System.out.print("Remove Item : ");
+        System.out.print("Enter items to be removed separated by comma: ");
         Scanner input = new Scanner(System.in);
         String[] item = input.nextLine().split(",");
+        for (String i: item
+        ) {
+            String trimmed = i.trim();
+            groceryList.remove(trimmed);
+        }
         groceryList.removeAll(List.of(item));
         printList(groceryList);
     }
 
     public static void printList(ArrayList<String> groceryList) {
         groceryList.sort(Comparator.naturalOrder());
-        System.out.println("=".repeat(60));
+        System.out.println("=".repeat(groceryList.size() * 10));
         System.out.println("Grocery List : " + groceryList);
-        System.out.println("=".repeat(60));
+        System.out.println("=".repeat(groceryList.size() * 10));
     }
 }
 
