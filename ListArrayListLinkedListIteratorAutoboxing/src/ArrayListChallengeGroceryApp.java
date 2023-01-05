@@ -6,15 +6,17 @@ import java.util.Scanner;
 public class ArrayListChallengeGroceryApp {
     public static void main(String[] args) {
 
-        System.out.println("-".repeat(30));
-        System.out.println("------ GROCERY APP -------");
-        System.out.println("-".repeat(30));
-
         ArrayList<String> groceryList = new ArrayList<>();
         var answer = new Scanner(System.in);
         boolean flag = true;
 
+        // Print header
+        printHeader();
+
+        // Run till valid input
         while (flag) {
+
+            // Print options
             printActions();
             switch (Integer.parseInt(answer.nextLine())) {
                 case 1 -> addItem(groceryList);
@@ -22,6 +24,14 @@ public class ArrayListChallengeGroceryApp {
                 default -> flag = false;
             }
         }
+    }
+
+    public static void printHeader() {
+        int hyphen = 50;
+        String msg = "-".repeat(hyphen) + " GROCERY APP " + "-".repeat(hyphen);
+        System.out.println("-".repeat(msg.length()));
+        System.out.println(msg);
+        System.out.println("-".repeat(msg.length()));
     }
 
     public static void printActions() {
@@ -33,7 +43,6 @@ public class ArrayListChallengeGroceryApp {
                     
                     Enter a number for which action you want to do:""";
         System.out.print(textblock + " ");
-
     }
 
     public static void addItem(ArrayList<String> groceryList) {
@@ -53,7 +62,7 @@ public class ArrayListChallengeGroceryApp {
                 groceryList.add(trimmed);
             }
         }
-
+        // After operation print grocery list
         printList(groceryList);
     }
 
@@ -66,7 +75,8 @@ public class ArrayListChallengeGroceryApp {
             String trimmed = i.trim();
             groceryList.remove(trimmed);
         }
-        groceryList.removeAll(List.of(item));
+
+        // After operation print grocery list
         printList(groceryList);
     }
 
