@@ -4,7 +4,7 @@ public class LinkedListDemo {
     public static void main(String[] args) {
 
         // WAY 1
-//        LinkedList<String> placesToVisit = new LinkedList<>();
+        // LinkedList<String> placesToVisit = new LinkedList<>();
 
         // WAY 2
         var placesToVisit = new LinkedList<String>();
@@ -16,7 +16,8 @@ public class LinkedListDemo {
         addMoreElements(placesToVisit);
         System.out.println(placesToVisit);
 
-        removeMoreElements(placesToVisit);
+//        removeMoreElements(placesToVisit);
+        gettingElements(placesToVisit);
         System.out.println(placesToVisit);
     }
 
@@ -82,4 +83,27 @@ public class LinkedListDemo {
         String p4 = placesToVisit.pop();
         System.out.println(p4 + " was removed");
     }
+
+    public static void gettingElements(LinkedList<String> placesToVisit) {
+        System.out.println("Retrieved element - " + placesToVisit.get(4));
+
+        System.out.println("First element - " + placesToVisit.getFirst());
+        System.out.println("Last element - " + placesToVisit.getLast());
+        System.out.println("Mumbai is at " + placesToVisit.indexOf("Mumbai"));
+        System.out.println("Dhule is at position of " + placesToVisit.lastIndexOf("Dhule"));
+
+        // QUEUE RETRIEVAL METHODS
+        // as per fifo, gets head / first element from the list
+        System.out.println("Element from element() - " + placesToVisit.element());
+
+        // STACK RETRIEVAL METHODS
+        //as per fifo, gets head / first element from the list
+        System.out.println("Element from peek() - " + placesToVisit.peek());
+        // as per fifo, gets head / first element from the list
+        System.out.println("Element from peekFirst() - " + placesToVisit.peekFirst());
+        // as per fifo, gets last element from the last
+        System.out.println("Element from peekLast() - " + placesToVisit.peekLast());
+    }
+
+    
 }
