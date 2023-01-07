@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 public class LinkedListDemo {
     public static void main(String[] args) {
@@ -13,11 +14,24 @@ public class LinkedListDemo {
         placesToVisit.add("Pune");
         placesToVisit.add(0,"Mumbai");
 
+        // ADD ELEMENTS
         addMoreElements(placesToVisit);
         System.out.println(placesToVisit);
 
-//        removeMoreElements(placesToVisit);
+        // REMOVE ELEMENTS
+        // removeMoreElements(placesToVisit);
+
+        // GETTING ELEMENTS FROM THE LIST
         gettingElements(placesToVisit);
+
+        // TRAVERSE LISTS - TRADITIONAL FOR
+        printItinerary(placesToVisit);
+
+        // TRAVERSE LISTS - FOREACH
+        printItinerary2(placesToVisit);
+
+        // TRAVERSE LISTS - ITERATOR
+        printItinerary3(placesToVisit);
         System.out.println(placesToVisit);
     }
 
@@ -105,5 +119,45 @@ public class LinkedListDemo {
         System.out.println("Element from peekLast() - " + placesToVisit.peekLast());
     }
 
-    
+    public static void printItinerary(LinkedList<String> placesToVisit) {
+        System.out.println("-".repeat(20) + "FOR VERSION" + "-".repeat(20) );
+        String firstPlace = placesToVisit.getFirst();
+        String lastPlace = placesToVisit.getLast();
+
+        System.out.println("Trip starts at: " + firstPlace);
+        for (int i = 1; i < placesToVisit.size(); i++) {
+            System.out.println("---> From: " + placesToVisit.get(i-1) + " to " + placesToVisit.get(i));
+        }
+        System.out.println("Trip ends at: " + lastPlace);
+    }
+
+    public static void printItinerary2(LinkedList<String> placesToVisit) {
+        System.out.println("-".repeat(20) + "FOREACH VERSION" + "-".repeat(20) );
+
+        System.out.println("Trip starts at: " + placesToVisit.getFirst());
+        String previousTown = placesToVisit.getFirst();
+        for (String place:
+             placesToVisit) {
+            System.out.println("---> From: " + previousTown + " to " + place);
+            previousTown = place;
+        }
+        System.out.println("Trip ends at: " + placesToVisit.getLast());
+    }
+
+    public static void printItinerary3(LinkedList<String> placesToVisit) {
+        System.out.println("-".repeat(20) + "ITERATOR VERSION" + "-".repeat(20) );
+
+        System.out.println("Trip starts at: " + placesToVisit.getFirst());
+        String previousTown = placesToVisit.getFirst();
+
+        // USE OF LIST ITERATOR
+        // we can pass index to listIterator from where we want to traverse the list
+        ListIterator<String> iterator = placesToVisit.listIterator(1);
+        while (iterator.hasNext()){
+            var town = iterator.next();
+            System.out.println("---> From: " + previousTown + " to " + town);
+            previousTown = town;
+        }
+        System.out.println("Trip ends at: " + placesToVisit.getLast());
+    }
 }
