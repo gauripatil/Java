@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
@@ -33,6 +34,9 @@ public class LinkedListDemo {
         // TRAVERSE LISTS - ITERATOR
         printItinerary3(placesToVisit);
         System.out.println(placesToVisit);
+
+        // ITERATOR DEMO
+        iteratorVsListIterator(placesToVisit);
     }
 
     public static void addMoreElements(LinkedList<String> placesToVisit){
@@ -159,5 +163,51 @@ public class LinkedListDemo {
             previousTown = town;
         }
         System.out.println("Trip ends at: " + placesToVisit.getLast());
+    }
+
+    public static void iteratorVsListIterator(LinkedList<String> placesToVisit) {
+        System.out.println("-".repeat(20) + "ITERATOR VS LIST ITERATOR" + "-".repeat(20) );
+        var iterator = placesToVisit.iterator();
+
+        System.out.println("LIST BEFORE DELETION OF ELEMENT USING ITERATOR.REMOVE(): " + placesToVisit);
+        // WHILE TRAVERSING USING ITERATOR, WE CAN REMOVE THE ELEMENTS FROM LIST
+        while (iterator.hasNext()){
+            if(iterator.next().equals("Pune")){
+                // THIS CODE WILL WORK FINE WITHOUT EXCEPTION IF ELEMENT IS REMOVED FROM LIST USING ITERATOR
+                // ITERATOR PROVIDES SAFE WAY TO REMOVE ELEMENT
+                // ITERATOR SUPPORTS ONLY REMOVE() AND MOVES ONLY IN FORWARD DIRECTION
+                iterator.remove();
+
+                // THIS CODE WILL THROW AN EXCEPTION OF CONCURRENTMODIFICATIONEXCEPTION
+                // CANNOT USE REMOVE ELEMENT ON LIST
+                // placesToVisit.remove("Pune")
+            }
+        }
+        System.out.println("LIST POST DELETION OF ELEMENT USING ITERATOR.REMOVE(): " + placesToVisit);
+
+
+        System.out.println("-".repeat(200));
+        // LIST ITERATOR
+        // SUPPORTS BOTH FORWARD & BACKWARD
+        // SUPPORTS - REMOVE, ADD & SET
+        var listIterator = placesToVisit.listIterator();
+        System.out.println("LIST BEFORE ADDITION OF ELEMENT USING ITERATOR.REMOVE(): " + placesToVisit);
+        while (listIterator.hasNext()){
+            if(listIterator.next().equals("Mumbai")) {
+                listIterator.add("Pune District");
+            }
+        }
+        System.out.println("LIST AFTER ADDITION OF ELEMENT USING ITERATOR.REMOVE(): " + placesToVisit);
+
+        // THIS CODE WNT PRINT ANYTHING AS WE HAVE ALREADY REACHED TO LAST ELEMENT IN ABOVE CODE.
+        while(listIterator.hasNext()) {
+            System.out.println(listIterator.next());
+        }
+
+        System.out.println("LIST TRAVERSAL USING BACKWARD FUNCTIONALITY: ");
+        // SO TO TRAVERSE AGAIN WE NEED TO TRAVERSE BACKWARDS
+        while (listIterator.hasPrevious()) {
+            System.out.println(listIterator.previous());
+        }
     }
 }
