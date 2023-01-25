@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class Main {
     public static void main(String[] args) {
         FootballPlayer joe = new FootballPlayer("Joe");
@@ -29,5 +32,19 @@ public class Main {
 
         adelaideCrows.matchResult(fremantle, 2, 1);
 //        adelaideCrows.matchResult(baseballTeam, 1, 1);
+
+        System.out.println("Rankings");
+        System.out.println(adelaideCrows.getName() + ": " + adelaideCrows.ranking());
+        System.out.println(melbourne.getName() + ": " + melbourne.ranking());
+        System.out.println(fremantle.getName() + ": " + fremantle.ranking());
+        System.out.println(hawthorn.getName() + ": " + hawthorn.ranking());
+
+        System.out.println(adelaideCrows.compareTo(melbourne));
+        System.out.println(adelaideCrows.compareTo(hawthorn));
+        System.out.println(hawthorn.compareTo(adelaideCrows));
+        System.out.println(melbourne.compareTo(fremantle));
+
+        ArrayList<Team> teams = new ArrayList<>();
+        Collections.sort(teams);
     }
 }
