@@ -5,7 +5,10 @@ import java.util.*;
  */
 public class Theatre {
     private final String theatreName;
-    private List<Seat> seats = new ArrayList<>();
+    // HERE LIST REFRENC CAN BE REPLACED WITH COLLECTION, SET, LIST, QUEUE, DEQUE & SORETDSET INTERFACE REFENRECES
+    // BUT CANNOT WITH ONE LEVEL DEEPER LEVEL OF INTERFACE OR CLASS REFERENCE LIKE TREE WOULD WORK...
+    // WHICH IS IMPLEMENTING SORTEDSET
+    public List<Seat> seats = new ArrayList<>();
 
     public Theatre(String theatreName, int numRows, int seatsPerRow) {
         this.theatreName = theatreName;
@@ -52,7 +55,7 @@ public class Theatre {
         }
     }
 
-    private class Seat implements Comparable<Seat> {
+    public class Seat implements Comparable<Seat> {
         private final String seatNumber;
         private boolean reserved = false;
 
