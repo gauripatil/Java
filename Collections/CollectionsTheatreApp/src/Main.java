@@ -30,6 +30,8 @@ public class Main {
         // Shuffle method will only shuffle entries in seatCopy
         // Hence shuffled output will be for only seatCopy
         // theatre.copy will print as it is
+        // same is for reverse()
+        // Collections.reverse(seatCopy);
         Collections.shuffle(seatCopy);
         System.out.println("Printing seatCopy post Collections.shuffle()");
         printList(seatCopy);
@@ -42,10 +44,15 @@ public class Main {
         System.out.println("Min seat number is " + minSeat.getSeatNumber());
         System.out.println("Max seat number is " + maxSeat.getSeatNumber());
 
-        
+        sortList(seatCopy);
+        System.out.println("Printing sorted seatCopy");
+        printList(seatCopy);
 
-
-
+        // THIS CODE WILL THROW EXCEPTION
+        // Source does not fit in dest
+        // at java.base/java.util.Collections.copy(Collections.java:561)
+        List<Theatre.Seat> newList = new ArrayList<>(theatre.seats.size());
+        Collections.copy(newList, theatre.seats);
     }
 
     public static void printList(List<Theatre.Seat> list) {
@@ -56,5 +63,17 @@ public class Main {
         System.out.println();
         System.out.println("===================================================================================================================================================================================================================================");
 
+    }
+
+    // Variation of bubble sort with nested for loop
+    // Usage of Collections.swap() method
+    public static void sortList(List<? extends Theatre.Seat> list) {
+        for (int i = 0; i < list.size() - 1; i++) {
+            for(int j=i; j< list.size(); j++) {
+                if(list.get(i).compareTo(list.get(j)) > 0) {
+                    Collections.swap(list, i, j);
+                }
+            }
+        }
     }
 }
