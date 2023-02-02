@@ -25,6 +25,38 @@ public class Main {
         }
         System.out.println("================================================");
 
+        // this will remove Lisp from map
+//        languages.remove("Lisp");
+        // This code wont remove Algol
+        if(languages.remove("Algol", "this will not work as description will not match")) {
+            System.out.println("Algol is removed");
+        } else {
+            System.out.println("Algol not removed, key/value pair not found");
+        }
+
+        // This code will remove algol
+        if(languages.remove("Algol", "an algorithmic language")) {
+            System.out.println("Algol is removed because key/value pair is found");
+        } else {
+            System.out.println("Algol not removed, key/value pair not found");
+        }
+
+        // This wont replace the Lisp because old value will not match
+        if(languages.replace("Lisp", "This wont replace the Lisp because old value will not match", "a functional programming language with imperative features")) {
+            System.out.println("Lisp replaced");
+        } else {
+            System.out.println("Lisp was not replaced");
+        }
+
+        // This wont replace the Lisp because old value will not match
+        if(languages.replace("Lisp", "Therein lies madness", "a functional programming language with imperative features")) {
+            System.out.println("Lisp replaced becaucse key/value exact pair matched");
+        } else {
+            System.out.println("Lisp was not replaced");
+        }
+
+        System.out.println(languages.replace("Scala", "this will not be added"));
+        
         for (String key:  languages.keySet()) {
             System.out.println(key + " : " + languages.get(key));
         }
