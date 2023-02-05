@@ -10,9 +10,10 @@ public class Location {
         this.locationId = locationId;
         this.description = description;
         this.exits = new HashMap<String, Integer>();
+        this.exits.put("Q", 0);
     }
 
-    public void addExits(String direction, int location) {
+    public void addExit(String direction, int location) {
         exits.put(direction, location);
     }
 
