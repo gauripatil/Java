@@ -2,6 +2,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+// Change the program to allow players to type full words, or phrases, then move to the
+// correct location based upon their input.
+// The player should be able to type commands such as "Go West", "run South", or just "East"
+// and the program will move to the appropriate location if there is one.  As at present, an
+// attempt to move in an invalid direction should print a message and remain in the same place.
+//
+// Single letter commands (N, W, S, E, Q) should still be available.
+
 public class Main {
     private static HashMap<Integer, Location> locations = new HashMap<Integer, Location>();
 
@@ -19,22 +27,23 @@ public class Main {
         locations.get(1).addExit("E", 3);
         locations.get(1).addExit("S", 4);
         locations.get(1).addExit("N", 5);
-//        locations.get(1).addExit("Q", 0);
 
         locations.get(2).addExit("N", 5);
-//        locations.get(2).addExit("Q", 0);
 
         locations.get(3).addExit("W", 1);
-//        locations.get(3).addExit("Q", 0);
 
         locations.get(4).addExit("N", 1);
         locations.get(4).addExit("W", 2);
-//        locations.get(4).addExit("Q", 0);
 
         locations.get(5).addExit("S", 1);
         locations.get(5).addExit("W", 2);
-//        locations.get(5).addExit("Q", 0);
 
+        Map<String, String> vocabulary = new HashMap<>();
+        vocabulary.put("QUIT", "Q");
+        vocabulary.put("NORTH", "N");
+        vocabulary.put("EAST", "E");
+        vocabulary.put("WEST", "W");
+        vocabulary.put("SOUTH", "S");
 
         int loc = 1;
         while(true) {
@@ -52,6 +61,18 @@ public class Main {
             System.out.println();
 
             String direction  = scanner.nextLine().toUpperCase();
+
+            // If direction hs more than 1 word, we need to only see for direction mentioned in the command
+            if(direction.length() > 1) {
+                String[] words = direction.split(" ");
+                for (String word: words) {
+                    if(vocabulary.containsKey(word)) {
+                        direction = vocabulary.get(word);
+                        break;
+                    }
+                }
+            }
+
             if(exits.containsKey(direction)) {
                 loc = exits.get(direction);
             } else {
