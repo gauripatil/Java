@@ -76,12 +76,12 @@ public class Main {
         System.out.println("PLANETS");
         for (HeavenlyBody planet:
              planets) {
-            System.out.println("\t" + planet.getName());
+            System.out.println("\t" + planet.getName().toUpperCase());
             HeavenlyBody body = planet;
-            System.out.println("Moons of " + body.getName());
+            System.out.println("\tMoons of " + body.getName() + " : " + body.getSatellites().size());
             for (HeavenlyBody moonBody:
                     body.getSatellites()) {
-                System.out.println("\t" + moonBody.getName());
+                System.out.println("\t\t" + moonBody.getName());
             }
             System.out.println("=".repeat(50));
         }
@@ -92,12 +92,11 @@ public class Main {
             moons.addAll(planet.getSatellites());
         }
 
-        System.out.println("=".repeat(25) + "ALL PLANETS" + "=".repeat(25));
+        System.out.println("=".repeat(25) + "ALL MOONS" + "=".repeat(25));
         for (HeavenlyBody moon:
                 moons) {
             System.out.println("\t" + moon.getName());
         }
-
 
     }
 }
