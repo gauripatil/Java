@@ -34,7 +34,7 @@ public class SymmetricAsymmetricSet {
         String[] arrayWords = sentence.split(" ");
         // Arrays.asList acts as a bridge between two collection while initializing
         // Here arrayWords is array of string and using Arrays.asList(), we are passing list of string to set
-        // it will retain the sequence & duplicate
+        // it will not retain the sequence & duplicate
         words.addAll(Arrays.asList(arrayWords));
 
         Set<String> nature = new HashSet<>();
