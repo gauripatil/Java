@@ -41,13 +41,57 @@ public class SymmetricAsymmetricSet {
         Set<String> divine = new HashSet<>();
         String[] natureWords = {"all", "nature", "is", "but", "art", "unknown", "to", "thee"};
         nature.addAll(Arrays.asList(natureWords));
+        printSet(nature);
 
         String[] divineWords = {"to", "err", "is", "human", "to", "forgive", "divine"};
         divine.addAll(Arrays.asList(divineWords));
+        printSet(divine);
 
-        for(String s : words) {
-            System.out.println(s);
+        // asymmetric difference nature - divine
+        System.out.println("nature - divine:");
+        Set<String> diff1 = new HashSet<>(nature);
+        diff1.removeAll(divine);
+        printSet(diff1);
+
+        // asymmetric difference divine - nature
+        System.out.println("divine - nature:");
+        Set<String> diff2 = new HashSet<>(divine);
+        diff2.removeAll(nature);
+        printSet(diff2);
+
+        Set<String> unionTest = new HashSet<>(nature);
+        unionTest.addAll(divine);
+        Set<String> intersectionTest = new HashSet<>(nature);
+        intersectionTest.retainAll(divine);
+
+        // symmetric difference divine - nature
+        System.out.println("Symmetric difference");
+        unionTest.removeAll(intersectionTest);
+        printSet(unionTest);
+
+        if(nature.containsAll(divine)) {
+            System.out.println("divine is subset of nature");
         }
+
+        if(divine.containsAll(nature)) {
+            System.out.println("nature is subset of divine");
+        }
+
+        if (nature.containsAll(intersectionTest)){
+            System.out.println("intersectionTest is subset of nature");
+        }
+
+        if (divine.containsAll(intersectionTest)){
+            System.out.println("intersectionTest is subset of divine");
+        }
+
+    }
+
+    public static void printSet(Set<String> set) {
+        for (String s : set) {
+            System.out.print(s + " ");
+        }
+        System.out.println("\n");
 
     }
 }
