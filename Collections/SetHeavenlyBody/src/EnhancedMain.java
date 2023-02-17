@@ -93,13 +93,27 @@ public class EnhancedMain {
             System.out.println("\t" + moon.getName());
         }
 
-        EnhancedHeavenlyBody pluto = new DwarfPlanet("Pluto", 842);
-        planets.add(pluto);
+        // this will get added even though The planet name is Pluto, because it is of type dwarfPlanet
+        EnhancedHeavenlyBody dwarfpluto = new DwarfPlanet("Pluto", 842);
+        planets.add(dwarfpluto);
+
+        // this will not get added because the Pluto here is of Planet type
+        EnhancedHeavenlyBody duplicatePluto = new Planet("Pluto", 1212);
+        planets.add(duplicatePluto);
 
         for(EnhancedHeavenlyBody planet : planets) {
             System.out.println(planet);
 //            System.out.println(planet.getName() + ": " + planet.getOrbitalPeriod());
         }
+
+        EnhancedHeavenlyBody earth1 = new Planet("Earth", 365);
+        EnhancedHeavenlyBody earth2 = new Planet("Earth", 365);
+        System.out.println(earth1.equals(earth2));
+        System.out.println(earth2.equals(earth1));
+        System.out.println(earth1.equals(duplicatePluto));
+        System.out.println(duplicatePluto.equals(earth1));
+
+
 
     }
 }
