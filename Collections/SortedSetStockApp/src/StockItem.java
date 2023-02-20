@@ -3,10 +3,10 @@ public class StockItem implements Comparable<StockItem>{
     private double price;
     private int quantityStock = 0;
 
-    public StockItem(String name, double price) {
+    public StockItem(String name, double price, int quantityStock) {
         this.name = name;
         this.price = price;
-        this.quantityStock = 0;
+        this.quantityStock = quantityStock;
     }
 
     public String getName() {
