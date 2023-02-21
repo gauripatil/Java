@@ -36,5 +36,31 @@ public class Main {
         for(String s: stockList.Items().keySet()) {
             System.out.println(s);
         }
+
+        Basket timsBasket = new Basket("Tim");
+        sellItem(timsBasket, "car", 1);
+        System.out.println(timsBasket);
+
+        sellItem(timsBasket, "car", 1);
+        System.out.println(timsBasket);
+
+        if(sellItem(timsBasket, "car", 1) != 1) {
+            System.out.println("There are no more cars in stock");
+        }
+
+    }
+
+    public static int sellItem(Basket basket, String item, int quantity) {
+        //retrieve the item from stock list
+        StockItem stockItem = stockList.get(item);
+        if(stockItem == null) {
+            System.out.println("We don't sell " + item);
+            return 0;
+        }
+        if(stockList.sellStock(item, quantity) != 0) {
+            basket.addToBasket(stockItem, quantity);
+            return quantity;
+        }
+        return 0;
     }
 }
