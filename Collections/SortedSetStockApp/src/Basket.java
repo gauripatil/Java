@@ -1,16 +1,18 @@
+import java.util.Collections;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class Basket {
     private final Map<StockItem, Integer> list;
     private  final String name;
 
-    public Basket(Map<StockItem, Integer> list, String name) {
+    public Basket(String name) {
         this.name = name;
-        this.list = list;
+        this.list = new TreeMap<>();
     }
 
     public Map<StockItem, Integer> getList() {
-        return list;
+        return Collections.unmodifiableMap(list);
     }
 
     public String getName() {
@@ -23,14 +25,12 @@ public class Basket {
             list.put(item, inBasket + quantity);
             return inBasket;
         }
-
         return 0;
-
     }
 
     @Override
     public String toString() {
-        String s = "\nShopping basket " + name + " contains " + list.size() + " items\n";
+        String s = "\nShopping basket " + name + " contains " + list.size() + (list.size() == 1 ?  " item" : " items") + " \n";
         double totalCost = 0.0;
         for (Map.Entry<StockItem, Integer> item : list.entrySet()) {
             s = s + item.getKey() + ". " + item.getValue() + " purchased\n";
