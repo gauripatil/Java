@@ -1,5 +1,4 @@
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -16,11 +15,11 @@ public class StockList {
             StockItem inStock = list.getOrDefault(item.getName(), item);
             // If there are already stocks on this item, adjust the quantity
             if(inStock != item) {
-                item.adjustStock(inStock.getQuantityStock());
+                item.adjustStock(inStock.availableQuantity());
             }
 
             list.put(item.getName(), item);
-            return item.getQuantityStock();
+            return item.availableQuantity();
         }
         return 0;
     }
@@ -28,7 +27,7 @@ public class StockList {
     public int sellStock(String item, int quantity) {
         StockItem inStock = list.getOrDefault(item, null);
 
-        if((inStock != null) && (inStock.getQuantityStock() >= quantity) && (quantity >0)) {
+        if((inStock != null) && (inStock.availableQuantity() >= quantity) && (quantity >0)) {
             inStock.adjustStock(-quantity);
             return quantity;
         }
@@ -58,9 +57,9 @@ public class StockList {
         for (Map.Entry<String, StockItem> item : list.entrySet()) {
             StockItem stockItem = item.getValue();
 
-            double itemValue = stockItem.getPrice() * stockItem.getQuantityStock();
+            double itemValue = stockItem.getPrice() * stockItem.availableQuantity();
 
-            s = s + stockItem + ". There are " + stockItem.getQuantityStock() + " in stock. Value of items: ";
+            s = s + stockItem + ". There are " + stockItem.availableQuantity() + " in stock. Value of items: ";
             s = s + String.format("%.2f",itemValue) + "\n";
             totalCost += itemValue;
         }
