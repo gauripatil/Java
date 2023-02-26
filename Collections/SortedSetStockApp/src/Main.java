@@ -51,14 +51,35 @@ public class Main {
         }
 
         sellItem(timsBasket, "spanner", 5);
-        System.out.println(timsBasket);
+//        System.out.println(timsBasket);
 
         sellItem(timsBasket, "juice", 4);
         sellItem(timsBasket, "cup", 12);
         sellItem(timsBasket, "bread", 1);
+//        System.out.println(timsBasket);
+
+//        System.out.println(stockList);
+
+        Basket basket = new Basket("customer");
+        sellItem(basket, "cup", 100);
+        sellItem(basket, "juice", 5);
+        removeItem(basket, "cup", 1);
+        System.out.println(basket);
+
+        removeItem(timsBasket, "car", 1);
+        removeItem(timsBasket, "cup", 9);
+        removeItem(timsBasket, "car", 1);
+
+        System.out.println("cars removed: " + removeItem(timsBasket, "car", 1));  // should not remove any
+
         System.out.println(timsBasket);
 
-        System.out.println(stockList);
+        // remove all items from timsBasket
+        removeItem(timsBasket, "bread", 1);
+        removeItem(timsBasket, "cup", 3);
+        removeItem(timsBasket, "juice", 4);
+        removeItem(timsBasket, "cup", 3);
+        System.out.println(timsBasket);
 
         // Though collections are unmodifiable maps, its individual object can be modified like this
         stockList.Items().get("car").adjustStock(2000);
