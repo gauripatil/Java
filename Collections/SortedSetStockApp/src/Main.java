@@ -56,7 +56,7 @@ public class Main {
         sellItem(timsBasket, "juice", 4);
         sellItem(timsBasket, "cup", 12);
         sellItem(timsBasket, "bread", 1);
-//        System.out.println(timsBasket);
+        System.out.println(timsBasket);
 
 //        System.out.println(stockList);
 
@@ -81,14 +81,29 @@ public class Main {
         removeItem(timsBasket, "cup", 3);
         System.out.println(timsBasket);
 
-        // Though collections are unmodifiable maps, its individual object can be modified like this
-        stockList.Items().get("car").adjustStock(2000);
-        stockList.get("car").adjustStock(-1000);
+        System.out.println("\nDisplay stock list before and after checkout");
+        System.out.println(basket);
+        System.out.println(stockList);
+        checkOut(basket);
+        System.out.println(basket);
         System.out.println(stockList);
 
-        for(Map.Entry<String, Double> price: stockList.PriceList().entrySet()) {
-            System.out.println(price.getKey() + " costs " + price.getValue());
+        // Though collections are unmodifiable maps, its individual object can be modified like this
+        StockItem car = stockList.Items().get("car");
+        if(car != null) {
+            car.adjustStock(2000);
         }
+        if(car != null) {
+            stockList.get("car").adjustStock(-1000);
+        }
+        System.out.println(stockList);
+
+//        for(Map.Entry<String, Double> price: stockList.PriceList().entrySet()) {
+//            System.out.println(price.getKey() + " costs " + price.getValue());
+//        }
+
+        checkOut(timsBasket);
+        System.out.println(timsBasket);
     }
 
     public static int sellItem(Basket basket, String item, int quantity) {
