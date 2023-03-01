@@ -31,6 +31,14 @@ public class Main {
             System.out.println(employee.getName());
         }
 
+        AnotherClass anotherClass = new AnotherClass();
+        String s = anotherClass.doSomething();
+        System.out.println(s);
+
+    }
+
+    public final static String doStringStuff(UpperConcat uc, String s1, String s2) {
+        return uc.upperAndConcat(s1, s2);
     }
 }
 
@@ -57,5 +65,28 @@ class Employee{
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+
+
+}
+
+
+
+interface UpperConcat {
+    public String upperAndConcat(String s1, String s2);
+}
+
+class AnotherClass {
+    public String doSomething() {
+        int  i =0;
+        UpperConcat uc = (s1, s2) -> {
+            System.out.println("The lambda expression`s class is "+ getClass().getName());
+            String result = s1.toUpperCase().concat(s2.toUpperCase());
+            return result;
+        };
+
+        System.out.println("Another class`s classname is " + getClass().getName());
+        return Main.doStringStuff(uc, "String1", "String2");
     }
 }
