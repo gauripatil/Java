@@ -31,6 +31,28 @@ public class Main {
             System.out.println(employee.getName());
         }
 
+
+        /////////////////////////////////////////////////////
+        // EXAMPLE STRING UPPERCASE & CONCATENATION
+
+        // WAY 1 & WAY 2 of uppercase conversion & concatenation will give same result
+        // but with lambda, less code require
+        
+        //// WAY 1 - Anonymous instance OF UpperConcat
+        String sillyString = doStringStuff(new UpperConcat() {
+            @Override
+            public String upperAndConcat(String s1, String s2) {
+                return s1.toUpperCase() + s2.toUpperCase();
+            }
+        }, employeesList.get(0).getName(), employeesList.get(1).getName());
+        System.out.println("Using anonymous instance of class : " + sillyString);
+
+        //// WAY 2 - Lambda expression
+        UpperConcat uc = (s1, s2) -> s1.toUpperCase() + s2.toUpperCase();
+        String sillyString2 = doStringStuff(uc, employeesList.get(0).getName(), employeesList.get(1).getName());
+        System.out.println( "Using lambda expression : " + sillyString2);
+
+
         AnotherClass anotherClass = new AnotherClass();
         String s = anotherClass.doSomething();
         System.out.println(s);
