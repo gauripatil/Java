@@ -31,14 +31,13 @@ public class Main {
             System.out.println(employee.getName());
         }
 
-
         /////////////////////////////////////////////////////
         // EXAMPLE STRING UPPERCASE & CONCATENATION
 
         // WAY 1 & WAY 2 of uppercase conversion & concatenation will give same result
         // but with lambda, less code require
-        
-        //// WAY 1 - Anonymous instance OF UpperConcat
+
+        //// WAY 1 - Anonymous instance of class implementing UpperConcat
         String sillyString = doStringStuff(new UpperConcat() {
             @Override
             public String upperAndConcat(String s1, String s2) {
@@ -53,14 +52,67 @@ public class Main {
         System.out.println( "Using lambda expression : " + sillyString2);
 
 
+        ///////////////////////////////////////////////////
+        /// Lambda & Scope
+
+        // POINT 1 - In this case anonymous inner class is implementing the UpperConcat
+        // Hence inside method implementation of upperAndConcat - getClass().getSimpleName() prints empty string
+        // as implementing class is anonymous
+        GauriAnotherClass gauriAnotherClass = new GauriAnotherClass();
+        String result1 = gauriAnotherClass.doSomething();
+        System.out.println("Result from GauriAnotherClass : " + result1);
+
+
+        // IMPORTANT
+        // POINT 2 - In this case lambda expression is implementing the UpperConcat
+        // Hence inside method implementation of upperAndConcat - getClass().getSimpleName() prints AnotherClass
+        // because anonymous instance isnt created and instead lambda expression is treated as nested block of code.
+        // and has the same scope as nested block.
+        System.out.println();
         AnotherClass anotherClass = new AnotherClass();
         String s = anotherClass.doSomething();
-        System.out.println(s);
+        System.out.println("Result from AnotherClass : " + s);
 
     }
 
     public final static String doStringStuff(UpperConcat uc, String s1, String s2) {
         return uc.upperAndConcat(s1, s2);
+    }
+}
+
+interface UpperConcat {
+    public String upperAndConcat(String s1, String s2);
+}
+
+
+class AnotherClass {
+    public String doSomething() {
+        int  i =0;
+        UpperConcat uc = (s1, s2) -> {
+            // O/P of below - AnotherClass : The lambda expression`s class is : AnotherClass
+            System.out.println("AnotherClass : The lambda expression`s class is "+ getClass().getSimpleName());
+            String result = s1.toUpperCase().concat(s2.toUpperCase());
+            return result;
+        };
+
+        // O/P of below - AnotherClass class`s classname is : AnotherClass
+        System.out.println("AnotherClass class`s classname is : " + getClass().getSimpleName());
+        return Main.doStringStuff(uc, "String1", "String2");
+    }
+}
+
+class GauriAnotherClass {
+    public String doSomething() {
+        // O/P of below - GauriAnotherClass class`s name : doSomething : GauriAnotherClass
+        System.out.println("GauriAnotherClass class`s name : doSomething : " + getClass().getSimpleName());
+        return Main.doStringStuff(new UpperConcat() {
+            @Override
+            public String upperAndConcat(String s1, String s2) {
+                // O/P of below - GauriAnotherClass class`s anonymous class`s name : upperAndConcat :
+                System.out.println("GauriAnotherClass class`s anonymous class`s name : upperAndConcat : " + getClass().getSimpleName());
+                return s1.toUpperCase() + s2.toUpperCase();
+            }
+        },"Gauri", "Patil");
     }
 }
 
@@ -87,28 +139,5 @@ class Employee{
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-
-
-}
-
-
-
-interface UpperConcat {
-    public String upperAndConcat(String s1, String s2);
-}
-
-class AnotherClass {
-    public String doSomething() {
-        int  i =0;
-        UpperConcat uc = (s1, s2) -> {
-            System.out.println("The lambda expression`s class is "+ getClass().getName());
-            String result = s1.toUpperCase().concat(s2.toUpperCase());
-            return result;
-        };
-
-        System.out.println("Another class`s classname is " + getClass().getName());
-        return Main.doStringStuff(uc, "String1", "String2");
     }
 }
