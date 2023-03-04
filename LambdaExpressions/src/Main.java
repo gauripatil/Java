@@ -16,7 +16,7 @@ public class Main {
         employeesList.add(jack);
         employeesList.add(snow);
 
-//        WAY 1 - REGULAR FUNCTION
+//        WAY 1 - REGULAR FUNCTION TO SORT EMPLOYEE
 //        Collections.sort(employees, new Comparator<Employee>() {
 //            @Override
 //            public int compare(Employee employee1, Employee employee2) {
@@ -24,12 +24,54 @@ public class Main {
 //            }
 //        });
 
-//       WAY 2 - LAMBDA EXPRESSION
+//       WAY 2 - LAMBDA EXPRESSION TO SORT EMPLOYEE
         Collections.sort(employeesList, (employee1, employee2) -> employee1.getName().compareTo(employee2.getName()));
 
         for(Employee employee : employeesList) {
-            System.out.println(employee.getName());
+            System.out.println(employee.getName() + " : " + employee.getAge());
         }
+
+
+
+        // WAY 1 - ITERATE EMPLOYEE LIST USING ADVANCED FOR LOOP, THREAD & LAMBDA
+        System.out.println("****** PRINTING EMPLOYEE NAME USING ADVANCED FOR, THREAD & LAMBDA ********");
+        for(Employee employee : employeesList) {
+            System.out.println(employee.getName());
+            new Thread(() -> {
+                System.out.println(employee.getAge());
+            } ).start();
+        }
+
+        /* O/P OF WAY 1
+        * ****** PRINTING EMPLOYEE NAME USING ADVANCED FOR, THREAD & LAMBDA ********
+        Jack Hill
+        40
+        John Doe
+        Snow White
+        30
+        Tim Buchalka
+        22
+        21
+        * */
+
+
+        // WAY 2 - ITERATE EMPLOYEE LIST USING LAMBDA & ADVANCED FOR
+        employeesList.forEach(employee -> {
+            System.out.println(employee.getName());
+            System.out.println(employee.getAge());
+        });
+
+        // O/P OF WAY 2
+        /*
+            Jack Hill
+            40
+            John Doe
+            30
+            Snow White
+            22
+            Tim Buchalka
+            21
+        * */
 
         /////////////////////////////////////////////////////
         // EXAMPLE STRING UPPERCASE & CONCATENATION
