@@ -25,16 +25,18 @@ public class Main {
 //        });
 
 //       WAY 2 - LAMBDA EXPRESSION TO SORT EMPLOYEE
-        Collections.sort(employeesList, (employee1, employee2) -> employee1.getName().compareTo(employee2.getName()));
+//        Collections.sort(employeesList, (employee1, employee2) -> employee1.getName().compareTo(employee2.getName()));
 
         for(Employee employee : employeesList) {
             System.out.println(employee.getName() + " : " + employee.getAge());
         }
 
 
-
         // WAY 1 - ITERATE EMPLOYEE LIST USING ADVANCED FOR LOOP, THREAD & LAMBDA
         System.out.println("****** PRINTING EMPLOYEE NAME USING ADVANCED FOR, THREAD & LAMBDA ********");
+        // NOTE: Here employee variable used in lambda is effectively final as
+        // advanced for loop create new local variable for each iteration so compiler does not complain
+        // hence variable is effectively final for each iteration.
         for(Employee employee : employeesList) {
             System.out.println(employee.getName());
             new Thread(() -> {
