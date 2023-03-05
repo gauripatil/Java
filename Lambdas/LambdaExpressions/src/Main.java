@@ -58,6 +58,7 @@ public class Main {
 
 
         // WAY 2 - ITERATE EMPLOYEE LIST USING LAMBDA & ADVANCED FOR
+        System.out.println("****** PRINTING EMPLOYEE NAME USING FOREACH LOOP ********");
         employeesList.forEach(employee -> {
             System.out.println(employee.getName());
             System.out.println(employee.getAge());
@@ -74,6 +75,8 @@ public class Main {
             Tim Buchalka
             21
         * */
+
+
 
         /////////////////////////////////////////////////////
         // EXAMPLE STRING UPPERCASE & CONCATENATION
