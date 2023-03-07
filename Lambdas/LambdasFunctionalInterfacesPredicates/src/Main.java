@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class Main {
     public static void main(String[] args) {
@@ -73,6 +75,23 @@ public class Main {
 
         System.out.println(greaterThan15.and(lessThan100).test(50));
         System.out.println(greaterThan15.and(lessThan100).test(15));
+
+        // RANDOM NUMBER GENERATOR
+        // WAY 1
+        System.out.println("************* USING REGULAR WAY *****************");
+        Random random = new Random();
+        for (int i=0; i<10; i++) {
+            System.out.println(random.nextInt(1000));
+        }
+
+        // WAY 2
+        // SUPPLIER INTERFACE TO GENERATE RANDOM NUMBERS
+        Random random1 = new Random();
+        Supplier<Integer> randomSupplier =  () -> random1.nextInt(1000);
+        System.out.println("************* USING SUPPLIER *****************");
+        for (int i = 0; i < 10; i++) {
+            System.out.println(randomSupplier.get());
+        }
     }
 
     public static void printEmployeeByAge(List<Employee> employees,
