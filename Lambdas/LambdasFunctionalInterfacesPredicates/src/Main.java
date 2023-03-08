@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Function;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -92,6 +93,45 @@ public class Main {
         for (int i = 0; i < 10; i++) {
             System.out.println(randomSupplier.get());
         }
+
+
+        /// ***************** PRINT LAST NAME  ******************
+        // WAY 1
+        System.out.println("************* PRINT LAST NAME USING REGUALR WAY *****************");
+        employeesList.forEach(employee -> {
+            String lastName = employee.getName().substring(employee.getName().indexOf(' ') + 1);
+            System.out.println("Last Name is : " + lastName);
+        });
+
+        // NOTE:
+        // CONSUMER: Doesn`t return any value
+        // SUPPLIER: Supplier doesn`t accept any parameter
+        // PREDICATE: Only returns true/false
+        // But our requirement is to pass a string & to return a string - Here comes job of FUNCTIONAL INTERFACE
+
+        // WAY 2
+        System.out.println("************* PRINT FIRST NAME OR LAST NAME RANDOMLY USING FUNCTIONAL INTERFACE *****************");
+        Function<Employee, String> getLastName = (Employee employee) -> {
+            return employee.getName().substring(employee.getName().indexOf(' ') + 1);
+        };
+
+        Function<Employee, String> getFirstName = (Employee employee) -> {
+            return employee.getName().substring(0, employee.getName().indexOf(' '));
+        };
+
+        Random random2 = new Random();
+        for (Employee employee : employeesList) {
+            if(random2.nextBoolean()) {
+                System.out.println(printName(getFirstName, employee));
+            } else {
+                System.out.println(printName(getLastName, employee));
+            }
+        }
+
+    }
+
+    private static String printName(Function<Employee, String> getName, Employee employee) {
+        return getName.apply(employee);
     }
 
     public static void printEmployeeByAge(List<Employee> employees,
