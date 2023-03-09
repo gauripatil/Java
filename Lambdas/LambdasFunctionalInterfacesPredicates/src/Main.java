@@ -110,6 +110,28 @@ public class Main {
         // But our requirement is to pass a string & to return a string - Here comes job of FUNCTIONAL INTERFACE
 
         // WAY 2
+        //   FUNCTION INTERFACE
+        //  So, imagine that you want to transform an object in some way.
+        //  And the transformation requires four steps.
+        //  For each step, there are several different algorithms you may want to run.
+        //  And which one to run will depend on the state of the application at the time,
+        //  or on the object that will be transformed.
+        //  So, let's suppose that there are three possible algorithms for step one,
+        //  two for step two, five for step three, and three for step four.
+        //  So, that's the possible three times two times five
+        //  times three equals 90 variations.
+        //  How would we do this using interfaces in a way
+        //  that wouldn't be unwieldy and require us to write lots of implementing classes,
+        //  using functions instead would result in less code
+        //  and the code would also be easier to read.
+        //  All we'd really have to do is write a method that accepts four functions,
+        //  and then write the 13 functions we may need to use.
+        //  When we want to transform an object, we pass in the appropriate function for each step.
+        //  So, I don't know about you, but to me, that sounds easier and a lot more readable.
+        //  This is really the power and convenience of using lambda expressions.
+        //  Alright, so I'm going to finish the video here. Now,. In the next video, we're going to continue on and
+        //  then we're going to work a bit more using functions in our employee code.
+
         System.out.println("************* PRINT FIRST NAME OR LAST NAME RANDOMLY USING FUNCTIONAL INTERFACE *****************");
         Function<Employee, String> getLastName = (Employee employee) -> {
             return employee.getName().substring(employee.getName().indexOf(' ') + 1);
@@ -127,6 +149,12 @@ public class Main {
                 System.out.println(printName(getLastName, employee));
             }
         }
+
+        /// ***************** CHAINED FUNCTIONS  ******************
+        Function<Employee, String> upperCase = employee -> employee.getName().toUpperCase();
+        Function<String, String> firstName = name -> name.substring(0, name.indexOf(' '));
+        Function chainedFunction = upperCase.andThen(firstName);
+        System.out.println("CHAINED FUNCTIONS UPPER & CONCAT: " + chainedFunction.apply(employeesList.get(0)));
 
     }
 
