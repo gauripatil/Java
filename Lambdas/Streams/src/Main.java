@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
@@ -42,7 +43,7 @@ public class Main {
                 .map(String::toUpperCase)
                 .filter(s -> s.startsWith("G"))
                 .sorted()
-                .forEach(s -> System.out.println(s));
+                .forEach(System.out::println);
 
         /// O/P
         // G49
@@ -50,5 +51,15 @@ public class Main {
         // G53
         // G60
         // G64
+
+
+        Stream<String> ioNumberStream = Stream.of("I26", "I17", "I29", "O71");
+        Stream<String> inNumberStream = Stream.of("N40", "N36", "I26", "I17", "I29", "O71");
+        Stream<String> concatStream = Stream.concat(ioNumberStream, inNumberStream);
+        System.out.println("-----------------------");
+        System.out.println(concatStream
+                .distinct()
+                .peek(System.out::println)
+                .count());
     }
 }
