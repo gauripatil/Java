@@ -91,6 +91,7 @@ public class Main {
         System.out.println("---------------");
 
         //////////////// ****************  COLLECT ********************
+        // ***** COLLECT - SUPPLIER, ACCUMULATOR & COMBINER
         List<String> sortedGNumbers = someBingoNumbers
                 .stream()
                 .map(String::toUpperCase)
@@ -101,5 +102,19 @@ public class Main {
         for(String s : sortedGNumbers) {
             System.out.println(s);
         }
+
+        //// NOTES: STREAM
+        // Alright, so a few notes about streams. Firstly, we can't reuse them, once we've called a terminal operation on a stream will receive the illegal state exception. If we try to operate on that stream again.
+        // operations in streams are lazily evaluated. So, what that means is that intermediate operations are not performed until there's a terminal operation.
+        // Also, we can use more specific stream interfaces when we're working with lists of numbers. So, int stream, long stream and double stream for example. Now, these interfaces have additional methods like sum, min, max, and a few others that are useful when working with numbers.
+        // Now, there's also parallel streams, which we use when we want to increase performance by executing streams in parallel.
+
+        // PRINT YOUNGEST EMPLYEE OF THE COMPANY
+        departments.stream()
+                .flatMap(department -> department.getEmployees().stream())
+                .reduce((e1, e2) -> e1.getAge() < e2.getAge() ? e1 : e2)
+                .ifPresent(System.out::println);
+
+
     }
 }
