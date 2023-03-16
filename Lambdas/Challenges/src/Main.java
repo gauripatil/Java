@@ -16,12 +16,16 @@ public class Main {
         Function<String, String > EverySecondChar = source -> {
             StringBuilder returnVal = new StringBuilder();
             for (int i=0; i<source.length(); i++) {
-                if(i%2 == 0) {
+                if(i%2 == 1) {
                     returnVal.append(source.charAt(i));
                 }
             }
             return returnVal.toString();
         };
+
+        String resultOfEverySecondChar = EverySecondChar.apply("1234567890");
+        System.out.println("=============== resultOfEverySecondChar -=================");
+        System.out.println(resultOfEverySecondChar);
     }
 
 
