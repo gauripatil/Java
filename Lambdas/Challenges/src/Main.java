@@ -35,12 +35,39 @@ public class Main {
         // CHALLENGE 5
         System.out.println(resultOfEverySecondChar2);
 
-
+2
         // CHALLENGE 6
         Supplier<String> iLoveJava = () -> "I Love Java ";
         // CHALLENGE 7
         String resultOfSupplier = iLoveJava.get();
         System.out.println(resultOfSupplier);
+
+        // CHALLENGE 8.1
+        // There are many interfaces in the Java SDK, and sometimes we can use lambda expressions instead of
+        // creating an instance that implements the interface we want to use.
+        // Given a specific interface, how can we tell whether we can map a lambda expression to it?
+        // What`s the criteria that has to be met?
+        // ANSWER:
+        // The interface has to be a functional interface. It can have only a single method that must be implemented.
+        // Functional interface can contain more than one method, but all the methods but one must have default
+        // implementations.
+        // Most of the time the documentation for an interface will state whether it`s a functional interface.
+
+
+        // CHALLENGE 8.2
+        // Can we use lambda expression o represent an instance f the java.util.concurrent.Callable interface?
+        // ANSWER: The Callable interface has only one method that has to be implemented - the call() method
+        // so we cna use lambda for it. The documentation also states hat it`s a functional interface.
+
+        // CHALLENGE 8.3
+        // Is the java.util.Comparator interface a functional interface?
+        // ANSWER: Yes it is. Despite containing over 10 methods, only one method has to be implemented - compare().
+        // Because of that it is functional interface.
+
+        // CHALLENGE 9
+        
+
+
     }
 
     public static String everySecondCharacter(Function<String, String> func, String source) {
