@@ -1,5 +1,10 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -35,7 +40,7 @@ public class Main {
         // CHALLENGE 5
         System.out.println(resultOfEverySecondChar2);
 
-2
+
         // CHALLENGE 6
         Supplier<String> iLoveJava = () -> "I Love Java ";
         // CHALLENGE 7
@@ -65,8 +70,37 @@ public class Main {
         // Because of that it is functional interface.
 
         // CHALLENGE 9
-        
+        List<String> topNames2015 = Arrays.asList(
+                "Amelia",
+                "Olivia",
+                "emily",
+                "Isla",
+                "Ava",
+                "oliver",
+                "Jack",
+                "Charlie",
+                "harry",
+                "Jacob"
+        );
 
+        // SOLUTION 9 - Using 3 lambdas - 1. Uppercase using forEach 2. Sort 3. Print
+        List<String> resultFirstCaseUpperSorted = new ArrayList<>();
+        topNames2015.forEach(s -> {
+            resultFirstCaseUpperSorted.add(s.substring(0,1).toUpperCase().concat(s.substring(1)));
+        });
+//        resultFirstCaseUpperSorted.sort((s1, s2) -> s1.compareTo(s2));
+//        System.out.println(resultFirstCaseUpperSorted);
+
+        // CHALLENGE 10 - USE METHOD REFERENCE
+        resultFirstCaseUpperSorted.sort(String::compareTo);
+        resultFirstCaseUpperSorted.forEach(System.out::println);
+
+        System.out.println("************ RESULT USING STREAM & LAMBDA *************");
+        // CHALLENGE 11 - USE OF STREAM & METHOD REFERENCES
+        topNames2015.stream()
+                .map(s -> s.substring(0, 1).toUpperCase().concat(s.substring(1)))
+                .sorted(String::compareTo)
+                .forEach(System.out::println);
 
     }
 
