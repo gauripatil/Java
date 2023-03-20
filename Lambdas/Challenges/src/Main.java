@@ -96,11 +96,41 @@ public class Main {
         resultFirstCaseUpperSorted.forEach(System.out::println);
 
         System.out.println("************ RESULT USING STREAM & LAMBDA *************");
-        // CHALLENGE 11 - USE OF STREAM & METHOD REFERENCES
+        // CHALLENGE 11 - USE OF STREAM & METHOD REFERENCES & LAMBDA
         topNames2015.stream()
                 .map(s -> s.substring(0, 1).toUpperCase().concat(s.substring(1)))
                 .sorted(String::compareTo)
                 .forEach(System.out::println);
+
+        // CHALLENGE 12 - Names starting with A
+        List <String> namesStartsWithA = topNames2015.stream()
+                .map(s -> s.substring(0, 1).toUpperCase().concat(s.substring(1)))
+                .filter(s -> s.startsWith("A"))
+                .collect(Collectors.toList());
+        Long namesStartsWithACnt = topNames2015.stream()
+                .map(s -> s.substring(0, 1).toUpperCase().concat(s.substring(1)))
+                .filter(s -> s.startsWith("A"))
+                .count();
+        System.out.println("Names starting with A : " + namesStartsWithA + " Count : " + namesStartsWithACnt);
+
+        // CHALLENGE 13
+        topNames2015
+                .stream()
+                .map(s -> s.substring(0, 1).toUpperCase().concat(s.substring(1)))
+                .peek(System.out::println)
+                .sorted(String::compareTo);
+        // ANSWER - Above code snippet does not print anything on as there is no terminal operator.
+        // Remember Stream chains are evaluated lazily. Nothing happens until a terminal operation is added to the chain.
+        // at that point, chain is executed.
+
+        // CHALLENGE 14 - FIX ABOVE PROBLEM
+        topNames2015
+                .stream()
+                .map(s -> s.substring(0, 1).toUpperCase().concat(s.substring(1)))
+                .peek(System.out::println)
+                .sorted(String::compareTo)
+                .collect(Collectors.toList());
+
 
     }
 
