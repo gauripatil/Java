@@ -35,11 +35,25 @@ public class Main {
 
         String hasWhitespace = "I have blanks and\ta tab, and also a newline\n";
         System.out.println(hasWhitespace);
+
+        // Input: I have blanks and	a tab, and also a newline
+        // Output: Ihaveblanksandatab,andalsoanewline
         System.out.println(hasWhitespace.replaceAll("\\s", ""));
+
+
+        // Output: I have blanks andXa tab, and also a newline
         System.out.println(hasWhitespace.replaceAll("\t", "X"));
+
+        // Output: (Empty line)
         System.out.println(hasWhitespace.replaceAll("\\S", ""));
+
+        // Output: XXXXXXXXXXXXXXXXXXXXXXX
         System.out.println(newAlphanumeric.replaceAll("\\w", "X"));
+
+        // Output: XIX XhaveX XblanksX XandX	XaX XtabX, XandX XalsoX XaX XnewlineX
         System.out.println(hasWhitespace.replaceAll("\\w", "X"));
+
+        // Output: XIX XhaveX XblanksX XandX	XaX XtabX, XandX XalsoX XaX XnewlineX
         System.out.println(hasWhitespace.replaceAll("\\b", "X"));
     }
 }
