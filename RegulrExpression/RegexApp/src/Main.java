@@ -1,3 +1,6 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Main {
     public static void main(String[] args) {
         String string = "I am a string. Yes, I am.";
@@ -40,7 +43,6 @@ public class Main {
         // Output: Ihaveblanksandatab,andalsoanewline
         System.out.println(hasWhitespace.replaceAll("\\s", ""));
 
-
         // Output: I have blanks andXa tab, and also a newline
         System.out.println(hasWhitespace.replaceAll("\t", "X"));
 
@@ -55,5 +57,38 @@ public class Main {
 
         // Output: XIX XhaveX XblanksX XandX	XaX XtabX, XandX XalsoX XaX XnewlineX
         System.out.println(hasWhitespace.replaceAll("\\b", "X"));
+
+
+        String thirdAlphanumericString = "abcDeeeeeeF12Ghhiiiijkl99z";
+
+        // OUTPUT: YYYeeeF12Ghhiiiijkl99z
+        System.out.println(thirdAlphanumericString.replaceAll("^abcDe{3}", "YYY"));
+
+        // OUTPUT: YYYF12Ghhiiiijkl99z
+        System.out.println(thirdAlphanumericString.replaceAll("^abcDe+", "YYY"));
+
+        // OUTPUT: YYYF12Ghhiiiijkl99z
+        System.out.println(thirdAlphanumericString.replaceAll("^abcDe*", "YYY"));
+
+        // OUTPUT: YYYeF12Ghhiiiijkl99z
+        System.out.println(thirdAlphanumericString.replaceAll("^abcDe{2,5}", "YYY"));
+
+        // OUTPUT: abcDeeeeeeF12GYkl99z
+        System.out.println(thirdAlphanumericString.replaceAll("h+i*j", "Y"));
+
+        StringBuilder htmlText = new StringBuilder("<h1>My Heading</h1>");
+        htmlText.append("<h2>Sub-heading</h2>");
+        htmlText.append("<p>This is a paragraph about something.</p>");
+        htmlText.append("<p>This is another paragraph about something else.</p>");
+        htmlText.append("<h2>Summary</h2>");
+        htmlText.append("<p>Here is the summary.</p>");
+
+        String h2Pattern = ".*<h2>.*";
+        Pattern pattern = Pattern.compile(h2Pattern);
+        Matcher matcher = pattern.matcher(htmlText);
+        // OUTPUT: true
+        System.out.println(matcher.matches());
+
+
     }
 }
