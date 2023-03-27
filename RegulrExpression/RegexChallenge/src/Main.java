@@ -20,6 +20,13 @@ public class Main {
         System.out.println("challenge2str2 : " + challenge2str2 + " : " +  challenge2str2.matches(regexChallenge21));
 
         // CHALLENGE 3 :
+        String regexChallenge3 = "I want a \\w+.";
+        Pattern pattern = Pattern.compile(regexChallenge3);
+        Matcher matcher = pattern.matcher(challenge2str1);
+        System.out.println( "challenge2str1 : " + challenge2str1 + " : " + matcher.matches());
+
+        matcher = pattern.matcher(challenge2str2);
+        System.out.println("challenge2str2 : " + challenge2str2 + " : " + matcher.matches());
 
     }
 }
