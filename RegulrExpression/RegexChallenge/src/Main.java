@@ -129,6 +129,38 @@ public class Main {
         }
 
 
+        // CHALLENGE 11 :
+        // Extract whats inside curly braces
+        String challenge11 = "{0, 2}, {0, 5}, {1, 3}, {2, 4}, {1, 2, 3}";
+        Pattern challenge11Pattern1 = Pattern.compile("\\{(.+?)\\}");
+        Matcher challenge11Matcher1 = challenge11Pattern1.matcher(challenge11);
+        while (challenge11Matcher1.find()) {
+            System.out.println("Occurrence: " + challenge11Matcher1.group(1));
+        }
+
+        // OUTPUT :
+        // Occurrence: 0, 2
+        //Occurrence: 0, 5
+        //Occurrence: 1, 3
+        //Occurrence: 2, 4
+        //Occurrence: 1, 2, 3
+
+
+        // CHALLENGE 11a :
+        String challenge11a = "{0, 2}, {0, 5}, {1, 3}, {2, 4} {x, y}, {6, 34}, {11, 12}";
+        Pattern challenge11aPattern11a = Pattern.compile("\\{(\\d+, \\d+)\\}");
+        Matcher challenge11Matcher11a = challenge11aPattern11a.matcher(challenge11a);
+        while(challenge11Matcher11a.find()) {
+            System.out.println("Occurrence: " + challenge11Matcher11a.group(1));
+        }
+
+        //OUTPUT :
+        // Occurrence: 0, 2
+        //Occurrence: 0, 5
+        //Occurrence: 1, 3
+        //Occurrence: 2, 4
+        //Occurrence: 6, 34
+        //Occurrence: 11, 12
 
 
     }
