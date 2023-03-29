@@ -78,7 +78,58 @@ public class Main {
         }
 
 
-        // 
+        // CHALLENGE 9 :
+        // Match a pattern used in challenge 7 & 8 from a file.
+        // Tabs are used to separate the matches with one exception.
+        // The last match is followed by newline.
+        String challenge9 = "abcd.135\tuvqz.7\ttzik.999\n";
+        Pattern challenge9pattern1 = Pattern.compile("([A-Za-z]+)\\.(\\d+)");
+        // () - for grouping - first () used for grouping characters & second () used for grouping numbers
+        Matcher challenge9matcher1 = challenge9pattern1.matcher(challenge8);
+
+        while (challenge9matcher1.find()) {
+            System.out.println("Occurrence : " + challenge9matcher1.group());
+            System.out.println("Occurrence : " + challenge9matcher1.group(1));
+            System.out.println("Occurrence : " + challenge9matcher1.group(2));
+
+            // OUTPUT :
+            // Occurrence : abcd.135
+            //Occurrence : abcd
+            //Occurrence : 135
+            //Occurrence : uvqz.7
+            //Occurrence : uvqz
+            //Occurrence : 7
+            //Occurrence : tzik.999
+            //Occurrence : tzik
+            //Occurrence : 999
+
+        }
+
+
+        // CHALLENGE 10 :
+        // Instead of printing out the number, print their start & end indices.
+        // Make indices inclusive
+        String challenge10 = "abcd.135\tuvqz.7\ttzik.999\n";
+        Pattern challenge10pattern1 = Pattern.compile("[A-Za-z]+\\.(\\d+)\\s");
+        // () - for grouping - first () used for grouping characters & second () used for grouping numbers
+        Matcher challenge10matcher1 = challenge10pattern1.matcher(challenge10);
+
+        while (challenge10matcher1.find()) {
+
+            System.out.println("Occurrence: start = " + challenge10matcher1.start(1) + " end = " + (challenge10matcher1.end(1) -1));
+//            System.out.println("Occurrence : " + challenge10matcher1.group());
+//            System.out.println("Occurrence : " + challenge10matcher1.group(1));
+//            System.out.println("Occurrence : " + challenge10matcher1.group(2));
+
+            // OUTPUT :
+            // Occurrence: start = 5 end = 7
+            //Occurrence: start = 14 end = 14
+            //Occurrence: start = 21 end = 23
+
+        }
+
+
+
 
     }
 }
