@@ -136,14 +136,15 @@ public class Main {
         Matcher challenge11Matcher1 = challenge11Pattern1.matcher(challenge11);
         while (challenge11Matcher1.find()) {
             System.out.println("Occurrence: " + challenge11Matcher1.group(1));
+
+            // OUTPUT :
+            // Occurrence: 0, 2
+            //Occurrence: 0, 5
+            //Occurrence: 1, 3
+            //Occurrence: 2, 4
+            //Occurrence: 1, 2, 3
         }
 
-        // OUTPUT :
-        // Occurrence: 0, 2
-        //Occurrence: 0, 5
-        //Occurrence: 1, 3
-        //Occurrence: 2, 4
-        //Occurrence: 1, 2, 3
 
 
         // CHALLENGE 11a :
@@ -152,16 +153,29 @@ public class Main {
         Matcher challenge11Matcher11a = challenge11aPattern11a.matcher(challenge11a);
         while(challenge11Matcher11a.find()) {
             System.out.println("Occurrence: " + challenge11Matcher11a.group(1));
+
+            //OUTPUT :
+            // Occurrence: 0, 2
+            //Occurrence: 0, 5
+            //Occurrence: 1, 3
+            //Occurrence: 2, 4
+            //Occurrence: 6, 34
+            //Occurrence: 11, 12
         }
 
-        //OUTPUT :
-        // Occurrence: 0, 2
-        //Occurrence: 0, 5
-        //Occurrence: 1, 3
-        //Occurrence: 2, 4
-        //Occurrence: 6, 34
-        //Occurrence: 11, 12
+        // CHALLENGE 12:
+        // Regex that match 5 digit US zip code.
+        String challenge12 = "11111";
+        System.out.println(challenge12.matches("^\\d{5}$"));
 
+        // CHALLENGE 13 :
+        String challenge13 = "11111-1111";
+        System.out.println(challenge13.matches("^\\d{5}-\\d{4}$"));
+
+        // CHALLENGE 14 :
+        // Common regex for Challenge 12 & 13
+        System.out.println(challenge12.matches("^\\d{5}(-\\d{4})?$"));
+        System.out.println(challenge13.matches("^\\d{5}(-\\d{4})?$"));
 
     }
 }
