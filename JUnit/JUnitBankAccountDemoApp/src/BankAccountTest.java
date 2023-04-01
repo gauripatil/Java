@@ -4,7 +4,9 @@ public class BankAccountTest {
 
     @org.junit.Test
     public void deposit() {
-        fail("This test is yet to implement.");
+        BankAccount account = new BankAccount("Tim", "Buchalka", 1000.00, BankAccount.CHECKING);
+        double balance = account.deposit(200.00, true);
+        assertEquals(1200.00, balance, 0);
     }
 
     @org.junit.Test
@@ -14,6 +16,8 @@ public class BankAccountTest {
 
     @org.junit.Test
     public void getBalance() {
-        fail("This test is yet to implement.");
+        BankAccount account = new BankAccount("Tim", "Buchalka", 1000.00, BankAccount.CHECKING);
+        account.deposit(200.00, true);
+        assertEquals(1200.00, account.getBalance(), 0);
     }
 }
