@@ -15,32 +15,35 @@ public class UtilitiesTest {
 
     @Test
     public void everyNthChar() {
-//        fail("This test is yet to implement..");
+        char[] output = utilities.everyNthChar(new  char[] {'h', 'e', 'l', 'l', 'o'}, 2);
+        assertArrayEquals(new char[] { 'e', 'l'}, output);
+        char[] output2 = utilities.everyNthChar(new  char[] {'h', 'e', 'l', 'l', 'o'}, 8);
+        assertArrayEquals(new char[] {'h', 'e', 'l', 'l', 'o'}, output2);
     }
 
     @Test
     public void removePairs() {
-        String input1 = "AABCDDEFF";
-        String result1 = utilities.removePairs(input1);
+        String result1 = utilities.removePairs("AABCDDEFF");
         System.out.println(result1);
-        String expectedResult1 = "ABCDEF";
-        assertEquals(result1, expectedResult1);
+        assertEquals("ABCDEF", result1);
 
-        String input2 = "ABCCABDEEF";
-        String result2 = utilities.removePairs(input2);
+        String result2 = utilities.removePairs("ABCCABDEEF");
         System.out.println(result2);
-        String expectedResult2 = "ABCABDEF";
-        assertEquals(result2, expectedResult2);
+        assertEquals("ABCABDEF", result2);
 
-
-
+        assertNull("Did not get null returned when argument passed was null", utilities.removePairs(null));
+        assertEquals("A", utilities.removePairs("A"));
+        assertEquals("", utilities.removePairs(""));
     }
 
     @Test
     public void converter() {
+        assertEquals(300, utilities.converter(10, 5));
     }
 
     @Test
     public void nullIfOddLength() {
+        assertNull(utilities.nullIfOddLength("odd"));
+        assertNotNull(utilities.nullIfOddLength("even"));
     }
 }
