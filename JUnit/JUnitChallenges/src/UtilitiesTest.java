@@ -41,6 +41,12 @@ public class UtilitiesTest {
         assertEquals(300, utilities.converter(10, 5));
     }
 
+    @org.junit.Test(expected=ArithmeticException.class)
+    public void converter_arithmeticException() throws Exception {
+        utilities.converter(10, 0);
+
+    }
+
     @Test
     public void nullIfOddLength() {
         assertNull(utilities.nullIfOddLength("odd"));
