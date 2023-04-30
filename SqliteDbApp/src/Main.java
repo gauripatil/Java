@@ -1,34 +1,39 @@
 import java.sql.*;
 
 public class Main {
+
+    public static final String DB_NAME = "testjava.db";
+    public static final String CONNECTION_STRING = "jdbc:sqlite:/Users/gauri/Documents/Java/SqliteDbApp/" + DB_NAME;
+    public static final String TABLE_NAME = "contacts";
     public static void main(String[] args) {
         try {
             // This line of code added to resolve - java.sql.SQLException: No suitable driver found for jdbc:sqlite
             Class.forName("org.sqlite.JDBC");
 
-            Connection connection = DriverManager.getConnection("jdbc:sqlite:/Users/gauri/Documents/Java/SqliteDbApp/testjava.db");
+            Connection connection = DriverManager.getConnection(CONNECTION_STRING);
             Statement statement = connection.createStatement();
 
-            statement.execute("CREATE TABLE IF NOT EXISTS " +
-                                    "contacts (name TEXT, phone INTEGER, email TEXT)");
+            statement.execute("DROP TABLE IF EXISTS " + TABLE_NAME);
+            statement.execute("CREATE TABLE IF NOT EXISTS " + TABLE_NAME
+                    +" (name TEXT, phone INTEGER, email TEXT)");
 
-            statement.execute("INSERT INTO contacts (name, phone, email) " +
+            statement.execute("INSERT INTO " + TABLE_NAME + " (name, phone, email) " +
                     "VALUES('Gauri', 465774, 'gauri@email.com')");
 
-            statement.execute("INSERT INTO contacts (name, phone, email) " +
+            statement.execute("INSERT INTO " + TABLE_NAME + " (name, phone, email) " +
                               "VALUES('Joe', 45632, 'joe@anywhere.com')");
 
-            statement.execute("INSERT INTO contacts (name, phone, email) " +
+            statement.execute("INSERT INTO " + TABLE_NAME +" (name, phone, email) " +
                     "VALUES('Jane', 4829484, 'jane@somewhere.com')");
 
-            statement.execute("INSERT INTO contacts (name, phone, email) " +
+            statement.execute("INSERT INTO " + TABLE_NAME + " (name, phone, email) " +
                     "VALUES('Fido', 9038, 'dog@email.com')");
 
-            statement.execute("UPDATE contacts SET phone=554433 WHERE name='Gauri'");
-            statement.execute("DELETE from contacts WHERE name='Fido'");
+            statement.execute("UPDATE " + TABLE_NAME + " SET phone=554433 WHERE name='Gauri'");
+            statement.execute("DELETE from " + TABLE_NAME + "  WHERE name='Fido'");
 
 
-            statement.execute("SELECT * FROM contacts");
+            statement.execute("SELECT * FROM " + TABLE_NAME +  " ");
             ResultSet result = statement.getResultSet();
 
             while (result.next()) {
@@ -80,9 +85,10 @@ public class Main {
              * it's possible that the closed methods won't be executed.
              */
 
-            System.out.println("Try to connect to db");
+            System.out.println("DONE");
         } catch (SQLException | ClassNotFoundException e) {
             System.out.println("Something went wrong" + e.toString());
+            e.printStackTrace();
         }
     }
 }
