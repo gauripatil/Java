@@ -5,6 +5,10 @@ public class Main {
     public static final String DB_NAME = "testjava.db";
     public static final String CONNECTION_STRING = "jdbc:sqlite:/Users/gauri/Documents/Java/SqliteDbApp/" + DB_NAME;
     public static final String TABLE_NAME = "contacts";
+    public static final String COLUMN_NAME = "name";
+    public static final String COLUMN_PHONE = "phone";
+    public static final String COLUMN_EMAIL = "email";
+
     public static void main(String[] args) {
         try {
             // This line of code added to resolve - java.sql.SQLException: No suitable driver found for jdbc:sqlite
@@ -15,31 +19,23 @@ public class Main {
 
             statement.execute("DROP TABLE IF EXISTS " + TABLE_NAME);
             statement.execute("CREATE TABLE IF NOT EXISTS " + TABLE_NAME
-                    +" (name TEXT, phone INTEGER, email TEXT)");
+                    + " ( " + COLUMN_NAME + " TEXT, " + COLUMN_PHONE + " INTEGER, " + COLUMN_EMAIL + " TEXT)");
 
-            statement.execute("INSERT INTO " + TABLE_NAME + " (name, phone, email) " +
-                    "VALUES('Gauri', 465774, 'gauri@email.com')");
+            insertContacts(statement, "Gauri", 465774, "gauri@email.com");
+            insertContacts(statement, "Joe", 45632, "joe@anywhere.com");
+            insertContacts(statement, "Jane", 4829484, "jane@somewhere.com");
+            insertContacts(statement, "Fido", 9038, "dog@email.com");
 
-            statement.execute("INSERT INTO " + TABLE_NAME + " (name, phone, email) " +
-                              "VALUES('Joe', 45632, 'joe@anywhere.com')");
-
-            statement.execute("INSERT INTO " + TABLE_NAME +" (name, phone, email) " +
-                    "VALUES('Jane', 4829484, 'jane@somewhere.com')");
-
-            statement.execute("INSERT INTO " + TABLE_NAME + " (name, phone, email) " +
-                    "VALUES('Fido', 9038, 'dog@email.com')");
-
-            statement.execute("UPDATE " + TABLE_NAME + " SET phone=554433 WHERE name='Gauri'");
-            statement.execute("DELETE from " + TABLE_NAME + "  WHERE name='Fido'");
-
+            statement.execute("UPDATE " + TABLE_NAME + " SET " + COLUMN_PHONE + "=554433 WHERE " + COLUMN_NAME + "='Gauri'");
+            statement.execute("DELETE from " + TABLE_NAME + "  WHERE " + COLUMN_NAME + "='Fido'");
 
             statement.execute("SELECT * FROM " + TABLE_NAME +  " ");
             ResultSet result = statement.getResultSet();
 
             while (result.next()) {
-                System.out.println(result.getString("name") + " " +
-                        result.getString("phone") + " " +
-                        result.getString("email"));
+                System.out.println(result.getString( COLUMN_NAME ) + " " +
+                        result.getString(COLUMN_PHONE ) + " " +
+                        result.getString(COLUMN_EMAIL));
             }
             result.close();
             statement.close();
@@ -90,5 +86,11 @@ public class Main {
             System.out.println("Something went wrong" + e.toString());
             e.printStackTrace();
         }
+    }
+
+    public static void insertContacts(Statement statement, String name, int phone, String email) throws SQLException {
+        statement.execute("INSERT INTO " + TABLE_NAME + " ( " + COLUMN_NAME + ", " + COLUMN_PHONE + " , " + COLUMN_EMAIL+ ") " +
+                "VALUES ( '" + name + "', '" + phone + "', '"+ COLUMN_EMAIL +"') ");
+
     }
 }
