@@ -2,7 +2,6 @@ package model;
 
 public class SongArtist {
 
-
         private String artistName;
         private String albumName;
         private int track;
