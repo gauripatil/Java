@@ -211,4 +211,19 @@ public class Datasource {
             System.out.println("Query failed: " + e.getMessage());
         }
     }
+
+    public int getCount(String table) {
+        String sql = "SELECT COUNT(*) AS count FROM " + table;
+        try(Statement statement = conn.createStatement();
+            ResultSet results = statement.executeQuery(sql)) {
+
+            int count = results.getInt("count");
+
+            System.out.format("Count = %d\n", count);
+            return count;
+        } catch(SQLException e) {
+            System.out.println("Query failed: " + e.getMessage());
+            return -1;
+        }
+    }
 }
