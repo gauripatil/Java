@@ -81,16 +81,22 @@ public class Datasource {
             COLUMN_SONG_ALBUM + ", " + COLUMN_SONG_TRACK + " FROM " + TABLE_ARTIST_SONG_VIEW +
             " WHERE " + COLUMN_SONG_TITLE + " = \"";
 
+    public static final String QUERY_VIEW_SONG_INFO_PREP = "SELECT " + COLUMN_ARTIST_NAME + ", " +
+            COLUMN_SONG_ALBUM + ", " + COLUMN_SONG_TRACK + " FROM " + TABLE_ARTIST_SONG_VIEW +
+            " WHERE " + COLUMN_SONG_TITLE + " = ?";
 
+    // SELECT name, album, track FROM artist_list WHERE title = ?
 
 
     private Connection conn;
+    private PreparedStatement querySongInfoViewPrepStatement;
 
     public boolean open() {
         try {
             Class.forName("org.sqlite.JDBC");
             System.out.println(CONNECTION_STRING);
             conn = DriverManager.getConnection(CONNECTION_STRING);
+            querySongInfoViewPrepStatement = conn.prepareStatement(QUERY_VIEW_SONG_INFO_PREP);
             System.out.println("Opened the connection");
             return true;
         } catch(SQLException | ClassNotFoundException e) {
@@ -101,6 +107,9 @@ public class Datasource {
 
     public void close() {
         try {
+            if(querySongInfoViewPrepStatement != null) {
+                querySongInfoViewPrepStatement.close();
+            }
             if(conn != null) {
                 conn.close();
             }
@@ -270,6 +279,31 @@ public class Datasource {
 
         try (Statement statement = conn.createStatement();
              ResultSet results = statement.executeQuery(sb.toString())) {
+
+            List<SongArtist> songArtists = new ArrayList<>();
+            while(results.next()) {
+                SongArtist songArtist = new SongArtist();
+                songArtist.setArtistName(results.getString(1));
+                songArtist.setAlbumName(results.getString(2));
+                songArtist.setTrack(results.getInt(3));
+                songArtists.add(songArtist);
+            }
+
+            return songArtists;
+
+        } catch(SQLException e) {
+            System.out.println("Query failed: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public List<SongArtist> querySongInfoViewPrepStatement2(String title) {
+
+
+        try {
+            querySongInfoViewPrepStatement.setString(1, title);
+            System.out.println(querySongInfoViewPrepStatement.toString());
+            ResultSet results = querySongInfoViewPrepStatement.executeQuery();
 
             List<SongArtist> songArtists = new ArrayList<>();
             while(results.next()) {
