@@ -63,6 +63,7 @@ public class Datasource {
 
     public static final String TABLE_ARTIST_SONG_VIEW = "artist_list";
 
+
     public static final String CREATE_ARTIST_FOR_SONG_VIEW = "CREATE VIEW IF NOT EXISTS " +
             TABLE_ARTIST_SONG_VIEW + " AS SELECT " + TABLE_ARTISTS + "." + COLUMN_ARTIST_NAME + ", " +
             TABLE_ALBUMS + "." + COLUMN_ALBUM_NAME + " AS " + COLUMN_SONG_ALBUM + ", " +
@@ -77,6 +78,8 @@ public class Datasource {
             TABLE_ALBUMS + "." + COLUMN_ALBUM_NAME + ", " +
             TABLE_SONGS + "." + COLUMN_SONG_TRACK;
 
+
+
     public static final String QUERY_VIEW_SONG_INFO =  "SELECT " + COLUMN_ARTIST_NAME + ", " +
             COLUMN_SONG_ALBUM + ", " + COLUMN_SONG_TRACK + " FROM " + TABLE_ARTIST_SONG_VIEW +
             " WHERE " + COLUMN_SONG_TITLE + " = \"";
@@ -87,9 +90,33 @@ public class Datasource {
 
     // SELECT name, album, track FROM artist_list WHERE title = ?
 
+    public static final String INSERT_ARTIST = "INSERT INTO " + TABLE_ARTISTS +
+            '(' + COLUMN_ARTIST_NAME + ") VALUES(?)";
+    public static final String INSERT_ALBUMS = "INSERT INTO " + TABLE_ALBUMS +
+            '(' + COLUMN_ALBUM_NAME + ", " + COLUMN_ALBUM_ARTIST + ") VALUES(?, ?)";
+
+    public static final String INSERT_SONGS = "INSERT INTO " + TABLE_SONGS +
+            '(' + COLUMN_SONG_TRACK + ", " + COLUMN_SONG_TITLE + ", " + COLUMN_SONG_ALBUM +
+            ") VALUES(?, ?, ?)";
+
+
+    public static final String QUERY_ARTIST = "SELECT " + COLUMN_ARTIST_ID + " FROM " +
+            TABLE_ARTISTS + " WHERE " + COLUMN_ARTIST_NAME + " = ?";
+
+    public static final String QUERY_ALBUM = "SELECT " + COLUMN_ALBUM_ID + " FROM " +
+            TABLE_ALBUMS + " WHERE " + COLUMN_ALBUM_NAME + " = ?";
+
 
     private Connection conn;
     private PreparedStatement querySongInfoViewPrepStatement;
+
+    private PreparedStatement insertIntoArtists;
+    private PreparedStatement insertIntoAlbums;
+    private PreparedStatement insertIntoSongs;
+
+    private PreparedStatement queryArtist;
+    private PreparedStatement queryAlbum;
+
 
     public boolean open() {
         try {
@@ -97,6 +124,11 @@ public class Datasource {
             System.out.println(CONNECTION_STRING);
             conn = DriverManager.getConnection(CONNECTION_STRING);
             querySongInfoViewPrepStatement = conn.prepareStatement(QUERY_VIEW_SONG_INFO_PREP);
+            insertIntoArtists = conn.prepareStatement(INSERT_ARTIST, Statement.RETURN_GENERATED_KEYS);
+            insertIntoAlbums = conn.prepareStatement(INSERT_ALBUMS, Statement.RETURN_GENERATED_KEYS);
+            insertIntoSongs = conn.prepareStatement(INSERT_SONGS);
+            queryArtist = conn.prepareStatement(QUERY_ARTIST);
+            queryAlbum = conn.prepareStatement(QUERY_ALBUM);
             System.out.println("Opened the connection");
             return true;
         } catch(SQLException | ClassNotFoundException e) {
@@ -110,6 +142,27 @@ public class Datasource {
             if(querySongInfoViewPrepStatement != null) {
                 querySongInfoViewPrepStatement.close();
             }
+
+            if(insertIntoArtists != null) {
+                insertIntoArtists.close();
+            }
+
+            if(insertIntoAlbums != null) {
+                insertIntoAlbums.close();
+            }
+
+            if(insertIntoSongs !=  null) {
+                insertIntoSongs.close();
+            }
+
+            if(queryArtist != null) {
+                queryArtist.close();
+            }
+
+            if(queryAlbum != null) {
+                queryAlbum.close();
+            }
+            
             if(conn != null) {
                 conn.close();
             }
